@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-import { onSaveNewTodo } from '../services/onSaveNewTodo'
 import TodosContext from '../context/TodosContext'
 import { useNavigate } from 'react-router'
 
@@ -27,7 +26,7 @@ export default function FormTodo({ id = null, onSave }) {
 
       <button onClick={(e) => {
         e.preventDefault()
-        onSave(todos, {title, description})
+        onSave(todos)
         navigate("/");
         localStorage.clear();
       }} className='rounded bg-gray-300 hover:bg-gray-400 border border-gray-600 p-1 w-[40%]'>save</button>
