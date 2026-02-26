@@ -14,19 +14,14 @@ export function onSaveNewTodo() {
   const title = localStorage.getItem("title");
   const description = localStorage.getItem("description");
   setTodos(SaveNewTodo(todos, { title, description }));
-  navigate("/");
-  localStorage.clear();
 }
 
 function SaveUpdatedTodo(todos, id, { title, description }) {
-  const updatedTodos = todos.filter((t) => !t.id === id);
-
-    newTodo.title = title
-    newTodo.description = description
-    updatedTodos.push(newTodo);
-    console.log(newTodo);
-  
-  return updatedTodos;
+  const todo = todos.find((t) => t.id == id);
+    todo.title = title
+    todo.description = description
+    todo.updatedAt = new Date()
+  return todos;
 }
 
 export function onSaveUpdatedTodo() {
@@ -34,9 +29,7 @@ export function onSaveUpdatedTodo() {
   const description = localStorage.getItem("description");
   if (title && description) {
     setTodos(
-      SaveUpdatedTodo(todos, { id, title, description, createAt, toggle }),
+      SaveUpdatedTodo(todos, id),
     );
-    navigate("/");
-    localStorage.clear();
   }
 }
