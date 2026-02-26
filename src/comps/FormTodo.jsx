@@ -3,7 +3,7 @@ import { onSaveNewTodo } from '../services/onSaveNewTodo'
 import TodosContext from '../context/TodosContext'
 import { useNavigate } from 'react-router'
 
-export default function FormTodo({ id = null }) {
+export default function FormTodo({ id = null, onSave }) {
   const { todos, setTodos } = useContext(TodosContext)
   const navigate = useNavigate()
   console.log(id);
@@ -27,6 +27,9 @@ export default function FormTodo({ id = null }) {
 
       <button onClick={(e) => {
         e.preventDefault()
+        onSave(todos, {title, description})
+        navigate("/");
+        localStorage.clear();
       }} className='rounded bg-gray-300 hover:bg-gray-400 border border-gray-600 p-1 w-[40%]'>save</button>
       <button onClick={()=>navigate('/')} className='rounded bg-gray-100 hover:bg-gray-200 border border-gray-600 p-1 w-[40%]'>Cencel</button>
       </div>
